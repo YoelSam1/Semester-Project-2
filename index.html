@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <meta
+      name="Description"
+      content="Latest listing page thumbnails with img and title with current, a search bar, and a form link to create a new listing"
+    />
+    <title>EasyBID | Home</title>
     <link rel="stylesheet" href="dist/css/index.css?v=1" />
 
     <script
@@ -11,75 +15,375 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
+    <script src="/js/header.mjs" type="module"></script>
+    <script src="/js/register.mjs" type="module"></script>
+    <script src="/js/login.mjs" type="module"></script>
+    <script src="/js/listing.mjs" type="module"></script>
   </head>
-  <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-            </li>
-          </ul>
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
+  <body class="bg-light d-flex flex-column min-vh-100">
+    <!-- Header -->
+    <header>
+      <nav
+        class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-light text-center shadow"
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand fw-bold" href="/">EasyBID</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse"
+            id="navbarSupportedContent"
+          ></div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
 
-    <div class="text-bg-primary p-3">Primary with contrasting color</div>
-    <div class="text-bg-secondary p-3">Secondary with contrasting color</div>
-    <div class="text-bg-success p-3">Success with contrasting color</div>
-    <div class="text-bg-danger p-3">Danger with contrasting color</div>
-    <div class="text-bg-warning p-3">Warning with contrasting color</div>
-    <div class="text-bg-info p-3">Info with contrasting color</div>
-    <div class="text-bg-light p-3">Light with contrasting color</div>
-    <div class="text-bg-dark p-3">Dark with contrasting color</div>
+    <!-- main -->
+    <main class="flex-grow-1">
+      <!-- Search bar -->
+      <section>
+        <div class="container mt-5">
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  class="form-control shadow-none"
+                  placeholder="Search for listings"
+                  aria-label="Search for listings"
+                  aria-describedby="button-addon2"
+                  id="search-input"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- creat listing button -->
+      <section>
+        <div class="text-center mt-2">
+          <a
+            href="#createlistingModal"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            >Create Listing</a
+          >
+        </div>
+      </section>
+
+      <!-- create listing -->
+      <section>
+        <div
+          class="modal fade mb-3"
+          id="createlistingModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="createlistingModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="createlistingModalLabel">
+                  Create New Listing
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body content-center">
+                <!-- create Listing Form -->
+                <form id="createListingForm" class="required action">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                      ><i class="bi bi-file-text"></i
+                    ></span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="title"
+                      placeholder="Title"
+                      required
+                    />
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                      ><i class="bi bi-pencil"></i
+                    ></span>
+                    <textarea
+                      class="form-control"
+                      id="description"
+                      placeholder="Description"
+                      required
+                    ></textarea>
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                      ><i class="bi bi-image"></i
+                    ></span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="media"
+                      placeholder="https://url.com/image.jpg"
+                      required
+                    />
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                      ><i class="bi bi-calendar"></i
+                    ></span>
+                    <input
+                      type="datetime-local"
+                      class="form-control"
+                      id="endsAt"
+                      required
+                    />
+                  </div>
+                  <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">
+                      Create Listing
+                    </button>
+                  </div>
+                </form>
+                <!-- Error Container -->
+                <div id="error-container" class="mt-3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- H1 Latest Listings -->
+      <section>
+        <h1 class="text-center mt-5">Latest Listing's</h1>
+      </section>
+
+      <!-- spinner -->
+      <section>
+        <div
+          id="loader"
+          class="loader-container d-flex justify-content-center align-items-center d-none"
+        >
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Listings container -->
+      <section>
+        <div class="listing container mt-5">
+          <div class="row justify-content-center" id="listings-container"></div>
+        </div>
+      </section>
+
+      <!-- Register Modal -->
+      <section>
+        <div
+          class="modal fade mb-3"
+          id="registerModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="registerModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="registerModalLabel">Register</h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body content-center">
+                <!-- register form -->
+                <form id="register-form" class="required action">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                      ><i class="bi bi-person"></i
+                    ></span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Your Name"
+                      id="name"
+                      pattern="[a-zA-Z0-9_]+"
+                      title="Invalid name. Only letters, numbers, and underscores are allowed."
+                      required
+                    />
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                      ><i class="bi bi-envelope"></i
+                    ></span>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      placeholder="Email"
+                      pattern=".+@(noroff\.no|stud\.noroff\.no)$"
+                      title="Email must be a valid @stud.noroff.no"
+                      required
+                    />
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                      ><i class="bi bi-lock"></i
+                    ></span>
+                    <input
+                      type="password"
+                      id="password"
+                      class="form-control"
+                      placeholder="Password"
+                      minlength="8"
+                      required
+                    />
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                      ><i class="bi bi-lock"></i
+                    ></span>
+                    <input
+                      type="password"
+                      id="confirm-password"
+                      class="form-control"
+                      placeholder="Confirm Password"
+                    />
+                  </div>
+                  <div class="d-grid">
+                    <button type="submit" class="btn btn-success">
+                      Register Now
+                    </button>
+                    <p class="text-center text-muted mt-2 wrapper">
+                      When You Clicking Register Botton, You Agree To Our
+                      <a href="#"> Terms and Conditions</a> and
+                      <a href="#"> Privacy Policy</a>
+                    </p>
+                    <p class="text-center wrapper">
+                      Alredy have an Account ?
+                      <a
+                        href="#loginModal"
+                        data-bs-toggle="modal"
+                        data-bs-target="#loginModal"
+                        >Login Here</a
+                      >
+                    </p>
+                  </div>
+                </form>
+                <!-- Error Container -->
+                <div id="error-container" class="mt-3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Login Modal -->
+      <section>
+        <div
+          class="modal fade mb-3"
+          id="loginModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="loginModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body content-center">
+                <!-- login form -->
+                <form id="login-form" class="required action">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                      ><i class="bi bi-envelope"></i
+                    ></span>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="login-email"
+                      pattern=".+@(noroff\.no|stud\.noroff\.no)$"
+                      title="Email must be a valid @stud.noroff.no"
+                      placeholder="Email"
+                      required
+                    />
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                      ><i class="bi bi-lock"></i
+                    ></span>
+                    <input
+                      type="password"
+                      class="form-control"
+                      placeholder="Password"
+                      id="login-password"
+                      required
+                    />
+                  </div>
+                  <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Login</button>
+
+                    <p class="text-center wrapper">
+                      Register Now For Free by clicking
+                      <a
+                        href="#registerModal"
+                        data-bs-toggle="modal"
+                        data-bs-target="#registerModal"
+                        >Register Here</a
+                      >
+                    </p>
+                  </div>
+                </form>
+                <!-- Error Container -->
+                <div id="login-error-container" class="mt-3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!--footer-->
+    <section>
+      <footer class="bg-dark py-5">
+        <div class="container text-light text-center col-8 col-sm-4">
+          <p class="display-5 mb-3">Contact Us</p>
+          <small class="text-white-50"
+            >&copy; Copyright. All right reserved.</small
+          >
+        </div>
+      </footer>
+    </section>
   </body>
 </html>
