@@ -66,9 +66,7 @@ function register(event) {
       if (error instanceof TypeError && error.message === "Failed to fetch") {
         displayError("Network error. Please check your internet connection.");
       } else {
-        displayError(
-          "Registration failed. Please try other Username or Email name."
-        );
+        displayError("Registration failed. Please try other Username.");
       }
     });
 }
