@@ -1,4 +1,4 @@
-### Semester Project 2 - _ EasyBid _ An auction site
+### Semester Project 2 - _EasyBid_ An auction site
 
 ![image](./easybid-site%20.png)
 
@@ -8,7 +8,7 @@
 
 - When a new user joins the website, they are given 1000 credits to use on the site. They can get credits by selling items and use credit by buying items. Non-registered users can search through the listings, but only registered users can make bids on listings.
 
-# This is what i have done though out the procces
+# This is what I have done throughout the process
 
 - A user with a stud.noroff.no email may register
 - A registered user may log in
@@ -26,9 +26,12 @@
 Follow these steps to set up and run the project:
 
 1. **Clone the Repository:**
+
    ```bash
    git clone https://github.com/YoelSam1/Semester-Project-2.git
+
    ```
+
 2. **bash:**
    `npm install`
 
