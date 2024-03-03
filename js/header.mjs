@@ -57,16 +57,17 @@ function constructNavLinks(authenticated) {
 const accessToken = localStorage.getItem("accessToken");
 const authenticated = accessToken !== null;
 
-
+// Construct navigation links based on authentication status
 constructNavLinks(authenticated);
 
 document.addEventListener("DOMContentLoaded", function () {
-  const currentPath = window.location.pathname.toLowerCase().replace(/\/$/, ""); 
+  const currentPath = window.location.pathname.toLowerCase().replace(/\/$/, "");
 
   const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
   navLinks.forEach(function (link) {
-    const linkPath = link.getAttribute("href").toLowerCase().replace(/\/$/, ""); 
-      link.classList.add("text-danger"); 
+    const linkPath = link.getAttribute("href").toLowerCase().replace(/\/$/, "");
+    if (linkPath === currentPath) {
+      link.classList.add("text-danger");
     }
   });
 });
