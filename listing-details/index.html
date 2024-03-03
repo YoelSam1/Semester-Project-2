@@ -7,7 +7,7 @@
       name="Description"
       content="Listing detail page where user can view Bids made on a Listing, name, Description and may add a Bid to another user's Listing."
     />
-    <title>EasyBID | listing Detail</title>
+    <title>EasyBID | Listing Detail</title>
     <link rel="stylesheet" href="/dist/css/index.css?v=1" />
 
     <script
@@ -49,17 +49,113 @@
 
     <!-- main -->
     <main class="flex-grow-1">
-      <!-- h1 -->
-      <section>
-        <h1>hallo</h1>
-      </section>
+      <div class="container-center mb-5">
+        <!-- Listing Detail -->
+        <section id="listing-details" class="hidden">
+          <div class="container mt-5">
+            <h1
+              id="listing-title"
+              class="text-uppercase text-break text-3xl font-medium mb-4 overflow-hidden text-truncate"
+            ></h1>
+            <div class="row">
+              <div id="listing-img" class="col-md-6">
+                <div class="">
+                  <div
+                    id="listing-img-gallery"
+                    class="img-thumbnail img-fluid"
+                  ></div>
+                </div>
+              </div>
 
-      <!-- Listings container -->
-      <section>
-        <div class="feed-details container mt-5">
-          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"></div>
-        </div>
-      </section>
+              <div id="listing-details-container" class="col-md-6">
+                <div id="listing-description" class="card p-4 mb-4">
+                  <h2 class="text-xl font-semibold mb-2">Description</h2>
+                  <p
+                    id="description"
+                    class="first-letter-capitalize break-word"
+                  ></p>
+                </div>
+                <div id="listing-bid" class="card p-4 text-center">
+                  <h2 id="listing-bid-title" class="text-xl font-semibold mb-4">
+                    Bid Details
+                  </h2>
+                  <div
+                    id="bid-list"
+                    class="d-flex align-items-center mb-4 group"
+                  >
+                    <span
+                      class="bg-success text-white text-sm rounded p-1.5 cursor-pointer"
+                      >View Bids</span
+                    >
+                    <div class="position-relative w-full">
+                      <ul
+                        id="bid-list-details"
+                        class="position-absolute z-10 w-auto top-2 end-0 text-black bg-warning px-4 py-2 rounded d-none group-hover:d-block"
+                      ></ul>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <p
+                      class="d-flex justify-content-between border-bottom border-dotted border-secondary pb-1"
+                    >
+                      Current bid:<span
+                        id="current-bid"
+                        class="text-success font-semibold"
+                      ></span>
+                    </p>
+                    <p
+                      class="d-flex justify-content-between gap-3 border-bottom border-dotted border-secondary pb-1"
+                    >
+                      Time left:<span
+                        id="bid-remaining"
+                        class="text-danger font-weight-bold"
+                      ></span>
+                    </p>
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      Seller:
+                      <div id="listing-seller" class="font-weight-bold"></div>
+                    </div>
+                  </div>
+                  <form id="bid-listing-form">
+                    <div
+                      class="mb-3 d-flex justify-content-center align-items-center"
+                    >
+                      <p class="whitespace-nowrap me-3">Your bid:</p>
+                      <div class="w-full">
+                        <label for="bid-on-listing">
+                          <input
+                            id="bid-on-listing"
+                            class="form-control"
+                            type="number"
+                            placeholder="Enter your bid"
+                          />
+                        </label>
+                      </div>
+                    </div>
+                    <button
+                      id="bid-btn"
+                      type="submit"
+                      class="btn btn-primary w-100"
+                    >
+                      Place Bid
+                    </button>
+                  </form>
+                  <div
+                    class="position-absolute bottom-0 start-0 end-0 d-none bidding-error text-danger bg-light border border-danger rounded p-4 text-center"
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <div
+              id="general-error"
+              class="text-2xl my-24 text-danger text-center bg-light border border-danger rounded p-4 w-fit mx-auto d-none"
+            ></div>
+          </div>
+          <div id="bid-error-message" class="error-message"></div>
+        </section>
+      </div>
 
       <!-- Register Modal -->
       <section>
@@ -242,16 +338,16 @@
       </section>
     </main>
 
-    <!--footer-->
-    <section>
-      <footer class="bg-dark py-5 mt-5">
+    <footer class="bg-dark py-5 mt-5">
+      <!--footer container-->
+      <section>
         <div class="container text-light text-center col-8 col-sm-4">
           <p class="display-5 mb-3">Contact Us</p>
           <small class="text-white-50"
             >&copy; Copyright. All right reserved.</small
           >
         </div>
-      </footer>
-    </section>
+      </section>
+    </footer>
   </body>
 </html>

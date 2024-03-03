@@ -16,7 +16,7 @@ loginForm.addEventListener("submit", login);
  * @param {Object} e - event emitter with preventDefault() function
  */
 function login(event) {
-  event.preventDefault(); // prevent default form submission
+  event.preventDefault();
 
   const email = emailInput.value.trim();
   const password = passwordInput.value.trim();
@@ -43,12 +43,15 @@ function login(event) {
     })
     .then((data) => {
       // Handle successful login
-      localStorage.setItem("accessToken", data.accessToken); // Store access token in localStorage
-      localStorage.setItem("credits", data.credits); // Store credits in localStorage
+      localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("credits", data.credits);
+      localStorage.setItem("name", data.name);
+      localStorage.setItem("email", data.email);
+      localStorage.setItem("avatar", data.avatar);
       // Remove previous user data if exists
       localStorage.removeItem("easybid");
       // Redirect to home page
-      window.location.href = "/"; // Redirect to the home page
+      window.location.href = "/";
     })
     .catch((error) => {
       displayError(error.message);

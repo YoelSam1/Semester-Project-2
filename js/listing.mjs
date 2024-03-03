@@ -1,10 +1,9 @@
-import { API_URL } from "./api_url.mjs";
-import { displaySpinner, hideSpinner } from "./spinner.mjs";
+import { API_URL, GET_LISTINGS } from "./api_url.mjs";
 
 let listingsContainer = document.querySelector("#listings-container");
 let searchInput = document.querySelector("#search-input");
 
-const baseURL = `${API_URL}/auction/listings`;
+const baseURL = `${API_URL}/auction${GET_LISTINGS}`;
 
 // Function to fetch listings
 async function fetchListings() {
@@ -12,21 +11,17 @@ async function fetchListings() {
     const response = await fetch(baseURL);
     let data = await response.json();
 
-    // Sort the data based on the 'created' property
-    data.sort((a, b) => new Date(b.created) - new Date(a.created));
+    // Check if data is an array
+    if (!Array.isArray(data)) {
+      console.error("Invalid data format: expected an array.");
+      return;
+    }
 
+    // Render the listings
     render(data);
 
-    // Event listener for search input
-    searchInput.addEventListener("input", () => {
-      const text = searchInput.value.toLowerCase();
-      const searchedData = data.filter(
-        (d) =>
-          (d.body && d.body.toLowerCase().includes(text)) ||
-          (d.title && d.title.toLowerCase().includes(text))
-      );
-      render(searchedData);
-    });
+    // Apply search functionality
+    searchListings(data);
   } catch (error) {
     console.error("Error fetching listings:", error);
   }
@@ -44,38 +39,52 @@ function render(data) {
     return;
   }
 
-  // Iterate through data in reverse order to ensure latest listing appears at the top
-  for (let i = data.length - 1; i >= 0; i--) {
-    const listing = data[i];
+  // Iterate through data to display listings
+  data.forEach((listing) => {
+    const listingElement = createListingElement(listing);
+    // Insert the listing element into the container
+    listingsContainer.appendChild(listingElement);
+  });
+}
 
-    const listingElement = document.createElement("div");
-    listingElement.classList.add(
-      "col-lg-3",
-      "col-md-4",
-      "col-sm-6",
-      "col-12",
-      "mb-4"
+// Function to create a listing element
+function createListingElement(listing) {
+  const listingElement = document.createElement("div");
+  listingElement.classList.add(
+    "col-lg-3",
+    "col-md-4",
+    "col-sm-6",
+    "col-12",
+    "mb-4"
+  );
+
+  // Construct listing HTML with fallback image
+  const imageSrc =
+    listing.media && listing.media.length > 0
+      ? listing.media[0]
+      : "fallback-image.jpg";
+  listingElement.innerHTML = `
+      <div class="card flex-item p-3 h-100">
+          <img src="${imageSrc}" class="card-img-top img-fluid h-100" alt="Listing Image">
+          <div class="card-body d-flex flex-column justify-content-between">
+              <div>
+                  <h5 class="card-title text-truncate mb-3">${listing.title}</h5>
+                  <p class="card-text mb-3">Current Bid: <span class="text-success-emphasis fw-bold">${listing._count.bids}</span></p>
+              </div>
+              <a href="/listing-details/index.html?listingId=${listing.id}" class="btn btn-primary align-self-start">View More</a>
+          </div>
+      </div>
+  `;
+  return listingElement;
+}
+
+// Function to filter listings based on search input
+function searchListings(allListings) {
+  searchInput.addEventListener("input", (event) => {
+    const searchTerm = event.target.value.toLowerCase();
+    const filteredListings = allListings.filter((listing) =>
+      listing.title.toLowerCase().includes(searchTerm)
     );
-
-    // Construct listing HTML with fallback image
-    const imageSrc =
-      listing.media && listing.media.length > 0
-        ? listing.media[0]
-        : "fallback-image.jpg";
-    listingElement.innerHTML = `
-        <div class="card flex-item p-3 h-100">
-            <img src="${imageSrc}" class="card-img-top img-fluid h-100" alt="Listing Image">
-            <div class="card-body d-flex flex-column justify-content-between">
-                <div>
-                    <h5 class="card-title text-truncate mb-3">${listing.title}</h5>
-                    <p class="card-text mb-3">Current Bid: <span class="text-success-emphasis fw-bold">${listing._count.bids}</span></p>
-                </div>
-                <a href="/listing-details/index.html?listingId=${listing.id}" class="btn btn-primary align-self-start">View More</a>
-            </div>
-        </div>
-    `;
-
-    // Insert the listing element at the beginning of the container
-    listingsContainer.insertAdjacentElement("afterbegin", listingElement);
-  }
+    render(filteredListings);
+  });
 }

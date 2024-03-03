@@ -19,6 +19,7 @@
     <script src="/js/register.mjs" type="module"></script>
     <script src="/js/login.mjs" type="module"></script>
     <script src="/js/listing.mjs" type="module"></script>
+    <script src="/js/create-listing.mjs" type="module"></script>
   </head>
   <body class="bg-light d-flex flex-column min-vh-100">
     <!-- Header -->
@@ -156,7 +157,11 @@
                     />
                   </div>
                   <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">
+                    <button
+                      id="createListingBtn"
+                      type="submit"
+                      class="btn btn-primary"
+                    >
                       Create Listing
                     </button>
                   </div>
@@ -372,16 +377,16 @@
       </section>
     </main>
 
-    <!--footer-->
-    <section>
-      <footer class="bg-dark py-5">
+    <footer class="bg-dark py-5">
+      <!--footer container-->
+      <section>
         <div class="container text-light text-center col-8 col-sm-4">
           <p class="display-5 mb-3">Contact Us</p>
           <small class="text-white-50"
             >&copy; Copyright. All right reserved.</small
           >
         </div>
-      </footer>
-    </section>
+      </section>
+    </footer>
   </body>
 </html>
