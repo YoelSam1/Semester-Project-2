@@ -1,13 +1,10 @@
 import { API_URL } from "./api_url.mjs";
 
-// Define the createListing function to create a new listing
 function createListing(title, description, media, endsAt) {
   if (!title || !endsAt) return alert("Title and endsAt are required fields.");
 
-  // Retrieve the authentication token from local storage
   const accessToken = localStorage.getItem("accessToken");
 
-  // Check if the authentication token is available
   if (!accessToken) {
     return alert(" To create listing need to login or register.");
   }
@@ -25,12 +22,12 @@ function createListing(title, description, media, endsAt) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + accessToken, // Include the access token in the headers
+      Authorization: "Bearer " + accessToken,
     },
     body: JSON.stringify(data),
   };
 
-  // Define the base URL for the API endpoint
+  // base URL for the API endpoint
   const baseURL = `${API_URL}/auction/listings`;
 
   // Send the POST request to create a new listing
@@ -44,7 +41,7 @@ function createListing(title, description, media, endsAt) {
     .then((data) => {
       console.log("Listing created:", data);
       alert("Listing created successfully!");
-      // Reload the page after creating the listing
+
       location.reload();
     })
     .catch((error) => {
@@ -58,7 +55,7 @@ function createListing(title, description, media, endsAt) {
 document
   .getElementById("createListingForm")
   .addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault();
 
     // Get input values from the form
     const title = document.getElementById("title").value;

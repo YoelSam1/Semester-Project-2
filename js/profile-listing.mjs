@@ -1,15 +1,14 @@
 import { API_URL } from "./api_url.mjs";
 import { fetchMetdhods } from "../api/fetch-methods.mjs";
 
-// Extracting the method from fetchMethods
 const { getListings, getListing } = fetchMetdhods;
 
-// Function to fetch listings
+//  fetch listings
 async function fetchListings() {
   try {
     const name = localStorage.getItem("name");
     const baseURL = `${API_URL}/auction/listings/${listingID}?_seller=true&_bids=true`;
-    const response = await fetch(baseURL, getListing); // Include the getListing method here
+    const response = await fetch(baseURL, getListing);
     if (!response.ok) {
       throw new Error("Failed to fetch listings");
     }
@@ -20,10 +19,8 @@ async function fetchListings() {
   }
 }
 
-// Fetch listings when the page loads
 fetchListings();
 
-// Function to render data
 function render(data) {
   const listingsContainer = document.querySelector("#cards-container");
   listingsContainer.innerHTML = "";

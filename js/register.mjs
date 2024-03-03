@@ -9,7 +9,6 @@ const errorContainer = document.querySelector("#error-container");
 
 const baseURL = `${API_URL}/auction/auth/register`;
 
-// event listener for form
 registerForm.addEventListener("submit", register);
 
 /**
@@ -17,7 +16,7 @@ registerForm.addEventListener("submit", register);
  * @param {Object} e - event emitter with preventDefault() function
  */
 function register(event) {
-  event.preventDefault(); // prevent default form submission
+  event.preventDefault();
 
   const name = nameInput.value.trim();
   const email = emailInput.value.trim();
@@ -51,12 +50,11 @@ function register(event) {
     .then((data) => {
       if (data?.id) {
         alert("Successfully registered, login now!");
-        // Hide the register modal
+
         const registerModal = document.getElementById("registerModal");
         const bootstrapRegisterModal =
           bootstrap.Modal.getInstance(registerModal);
         bootstrapRegisterModal.hide();
-        // Show the login modal after hiding the register modal
         const loginModal = document.getElementById("loginModal");
         const bootstrapLoginModal = new bootstrap.Modal(loginModal);
         bootstrapLoginModal.show();

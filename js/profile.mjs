@@ -1,4 +1,3 @@
-// Function to display user avatar
 function showUserAvatar() {
   const userAvatarContainer = document.querySelector("#user-avatar-container");
   const userAvatar = localStorage.getItem("avatar");
@@ -11,7 +10,7 @@ function showUserAvatar() {
 }
 showUserAvatar();
 
-// Function to display user information
+// display user information
 function showUserInfo() {
   const userName = localStorage.getItem("name");
   const userEmail = localStorage.getItem("email");

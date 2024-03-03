@@ -1,26 +1,22 @@
 import { API_URL } from "./api_url.mjs";
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Function to update user avatar
   function updateAvatar() {
     const avatarURLInput = document.querySelector("#avatarURL");
     const newAvatarURL = avatarURLInput.value.trim();
 
-    // Check if the input value is not empty
     if (newAvatarURL) {
       const userName = localStorage.getItem("name");
       const token = localStorage.getItem("accessToken");
 
-      // Check if token is null or empty
       if (!token) {
         console.error("Token is null or empty. Please log in again.");
         return;
       }
 
-      // Construct the API endpoint URL
+      //  API endpoint URL
       const baseURL = `${API_URL}/auction/profiles/${userName}/media`;
 
-      // Define options for updating avatar
       const updateAvatarOption = {
         method: "PUT",
         headers: {
@@ -32,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }),
       };
 
-      // Send PUT request to update avatar
       fetch(baseURL, updateAvatarOption)
         .then((response) => {
           if (!response.ok) {
@@ -41,10 +36,9 @@ document.addEventListener("DOMContentLoaded", function () {
           return response.json();
         })
         .then((data) => {
-          // Save the new avatar URL in localStorage
+          // localStorage
           localStorage.setItem("avatar", newAvatarURL);
 
-          // Update the avatar in the UI
           const userAvatarContainer = document.querySelector(
             "#user-avatar-container"
           );
@@ -56,12 +50,10 @@ document.addEventListener("DOMContentLoaded", function () {
           alert("Failed to update avatar. Please try again.");
         });
     } else {
-      // Display an error if the input field is empty
       alert("Avatar URL cannot be empty.");
     }
   }
 
-  // Attach the updateAvatar function to the button click event
   const updateAvatarButton = document.querySelector("#updateAvatarButton");
   updateAvatarButton.addEventListener("click", updateAvatar);
 });

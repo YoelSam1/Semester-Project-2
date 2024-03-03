@@ -1,4 +1,3 @@
-// login.mjs
 import { API_URL } from "./api_url.mjs";
 
 const emailInput = document.querySelector("#login-email");
@@ -8,7 +7,6 @@ const errorContainer = document.querySelector("#login-error-container");
 
 const loginURL = `${API_URL}/auction/auth/login`;
 
-// event listener for form
 loginForm.addEventListener("submit", login);
 
 /**
@@ -48,9 +46,8 @@ function login(event) {
       localStorage.setItem("name", data.name);
       localStorage.setItem("email", data.email);
       localStorage.setItem("avatar", data.avatar);
-      // Remove previous user data if exists
       localStorage.removeItem("easybid");
-      // Redirect to home page
+
       window.location.href = "/";
     })
     .catch((error) => {

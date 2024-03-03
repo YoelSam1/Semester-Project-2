@@ -5,32 +5,27 @@ let searchInput = document.querySelector("#search-input");
 
 const baseURL = `${API_URL}/auction${GET_LISTINGS}`;
 
-// Function to fetch listings
+// fetch listings
 async function fetchListings() {
   try {
     const response = await fetch(baseURL);
     let data = await response.json();
 
-    // Check if data is an array
     if (!Array.isArray(data)) {
       console.error("Invalid data format: expected an array.");
       return;
     }
 
-    // Render the listings
     render(data);
 
-    // Apply search functionality
     searchListings(data);
   } catch (error) {
     console.error("Error fetching listings:", error);
   }
 }
 
-// Fetch listings when the page loads
 fetchListings();
 
-// Function to render data
 function render(data) {
   listingsContainer.innerHTML = "";
 
@@ -39,15 +34,14 @@ function render(data) {
     return;
   }
 
-  // Iterate through data to display listings
   data.forEach((listing) => {
     const listingElement = createListingElement(listing);
-    // Insert the listing element into the container
+
     listingsContainer.appendChild(listingElement);
   });
 }
 
-// Function to create a listing element
+// create a listing element
 function createListingElement(listing) {
   const listingElement = document.createElement("div");
   listingElement.classList.add(
@@ -58,7 +52,7 @@ function createListingElement(listing) {
     "mb-4"
   );
 
-  // Construct listing HTML with fallback image
+  // listing HTML with fallback image
   const imageSrc =
     listing.media && listing.media.length > 0
       ? listing.media[0]
@@ -78,7 +72,7 @@ function createListingElement(listing) {
   return listingElement;
 }
 
-// Function to filter listings based on search input
+// filter listings based on search input
 function searchListings(allListings) {
   searchInput.addEventListener("input", (event) => {
     const searchTerm = event.target.value.toLowerCase();

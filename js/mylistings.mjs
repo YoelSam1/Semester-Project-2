@@ -97,12 +97,10 @@ function handleDeleteButtonClick(listingId) {
     });
 }
 
-// Function to handle update button click
 function handleUpdateButtonClick(listingId) {
-  // Fetch the existing listing data before opening the create listing modal
   fetchListing(listingId)
     .then((listingData) => {
-      // Populate the modal form fields with the existing listing data
+      // existing listing data
       document.getElementById("title").value = listingData.title;
       document.getElementById("description").value = listingData.description;
       document.getElementById("media").value = listingData.media[0];
@@ -110,7 +108,7 @@ function handleUpdateButtonClick(listingId) {
         .toISOString()
         .slice(0, 16);
 
-      // Open the create listing modal
+      // listing modal
       const modal = new bootstrap.Modal(
         document.getElementById("createlistingModal")
       );
@@ -122,20 +120,18 @@ function handleUpdateButtonClick(listingId) {
     });
 }
 
-// Function to fetch details of a specific listing by its ID
+// fetch listing by its ID
 function fetchListing(listingId) {
   const token = localStorage.getItem("accessToken");
 
-  // Check if token is null or empty
   if (!token) {
     console.error("Token is null or empty. Please log in again.");
     return Promise.reject("User not authenticated or missing access token.");
   }
 
-  // Construct the API endpoint URL for fetching listing details
+  // API endpoint URL for fetching listing details
   const url = `${API_URL}/auction/listings/${listingId}`;
 
-  // Define request options
   const options = {
     method: "GET",
     headers: {
@@ -158,7 +154,7 @@ function fetchListing(listingId) {
     });
 }
 
-// Fetch and display listings when the profile page loads
+// Fetch and display listings
 document.addEventListener("DOMContentLoaded", async function () {
   try {
     const listings = await fetchListings();
@@ -169,7 +165,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 });
 
-// Attach event listener to handle delete button clicks
+// Attach listener to handle delete button clicks
 document.addEventListener("click", function (event) {
   if (event.target.classList.contains("delete-button")) {
     const listingId = event.target.dataset.listingId;
