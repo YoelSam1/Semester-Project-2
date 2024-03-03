@@ -53,11 +53,9 @@ function constructNavLinks(authenticated) {
   }
 }
 
-// Check if the user is authenticated
 const accessToken = localStorage.getItem("accessToken");
 const authenticated = accessToken !== null;
 
-// Construct navigation links based on authentication status
 constructNavLinks(authenticated);
 
 document.addEventListener("DOMContentLoaded", function () {

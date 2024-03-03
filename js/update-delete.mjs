@@ -32,11 +32,9 @@ export function updateListing(listingId, updatedData) {
     });
 }
 
-// delete a listing
 export function deleteListing(listingId) {
   const accessToken = localStorage.getItem("accessToken");
 
-  // Check if token is null or empty
   if (!accessToken) {
     console.error("Token is null or empty. Please log in again.");
     return Promise.reject("User not authenticated or missing access token.");
@@ -58,7 +56,7 @@ export function deleteListing(listingId) {
         }
         throw new Error("Failed to delete listing.");
       }
-      // If delete was successful, return the ID of the deleted listing
+
       return listingId;
     })
     .catch((error) => {

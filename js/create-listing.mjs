@@ -9,7 +9,6 @@ function createListing(title, description, media, endsAt) {
     return alert(" To create listing need to login or register.");
   }
 
-  // Construct the data object for the request
   const data = {
     title,
     description,
@@ -17,7 +16,6 @@ function createListing(title, description, media, endsAt) {
     endsAt,
   };
 
-  // Construct the request options
   const requestOptions = {
     method: "POST",
     headers: {
@@ -30,7 +28,6 @@ function createListing(title, description, media, endsAt) {
   // base URL for the API endpoint
   const baseURL = `${API_URL}/auction/listings`;
 
-  // Send the POST request to create a new listing
   fetch(baseURL, requestOptions)
     .then((response) => {
       if (!response.ok) {
@@ -51,18 +48,15 @@ function createListing(title, description, media, endsAt) {
     });
 }
 
-// Add an event listener to the form submission
 document
   .getElementById("createListingForm")
   .addEventListener("submit", function (event) {
     event.preventDefault();
 
-    // Get input values from the form
     const title = document.getElementById("title").value;
     const description = document.getElementById("description").value;
     const media = document.getElementById("media").value;
     const endsAt = document.getElementById("endsAt").value;
 
-    // Call the createListing function with input values
     createListing(title, description, media, endsAt);
   });

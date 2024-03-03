@@ -140,7 +140,6 @@ function renderListingDetails(listing) {
 const urlParams = new URLSearchParams(window.location.search);
 const listingId = urlParams.get("listingId");
 
-// Fetch and render listing details
 if (listingId) {
   fetchListingDetails(listingId);
 }

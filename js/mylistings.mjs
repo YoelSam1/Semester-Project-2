@@ -1,13 +1,10 @@
-// Import the API_URL constant from api_url.mjs
 import { API_URL } from "./api_url.mjs";
 import { deleteListing, updateListing } from "./update-delete.mjs";
 
-// Function to fetch listings created by the user
 async function fetchListings() {
   const userName = localStorage.getItem("name");
   const token = localStorage.getItem("accessToken");
 
-  // Check if token is null or empty
   if (!token) {
     console.error("Token is null or empty. Please log in again.");
     return Promise.reject("User not authenticated or missing access token.");
@@ -16,7 +13,6 @@ async function fetchListings() {
   // Construct the API endpoint URL
   const url = `${API_URL}/auction/profiles/${userName}/listings`;
 
-  // Define request options
   const options = {
     method: "GET",
     headers: {
@@ -25,7 +21,6 @@ async function fetchListings() {
     },
   };
 
-  // Fetch listings
   try {
     const response = await fetch(url, options);
     if (!response.ok) {
@@ -38,14 +33,11 @@ async function fetchListings() {
   }
 }
 
-// Function to display listings on the profile page
 function displayListings(listings) {
   const cardsContainer = document.getElementById("cards-container");
 
-  // Clear previous listings
   cardsContainer.innerHTML = "";
 
-  // Render new listings
   listings.forEach((listing) => {
     const card = document.createElement("div");
     card.classList.add("col", "mb-4");
@@ -70,7 +62,6 @@ function displayListings(listings) {
     cardsContainer.appendChild(card);
   });
 
-  // Attach event listeners to update buttons
   const updateButtons = document.querySelectorAll(".update-button");
   updateButtons.forEach((button) => {
     button.addEventListener("click", function (event) {
@@ -80,11 +71,9 @@ function displayListings(listings) {
   });
 }
 
-// Function to handle delete button click
 function handleDeleteButtonClick(listingId) {
   deleteListing(listingId)
     .then(() => {
-      // Remove the deleted listing element from the DOM
       const deletedListingElement = document.getElementById(listingId);
       if (deletedListingElement) {
         deletedListingElement.remove();
@@ -120,7 +109,6 @@ function handleUpdateButtonClick(listingId) {
     });
 }
 
-// fetch listing by its ID
 function fetchListing(listingId) {
   const token = localStorage.getItem("accessToken");
 
@@ -129,7 +117,6 @@ function fetchListing(listingId) {
     return Promise.reject("User not authenticated or missing access token.");
   }
 
-  // API endpoint URL for fetching listing details
   const url = `${API_URL}/auction/listings/${listingId}`;
 
   const options = {
@@ -140,7 +127,6 @@ function fetchListing(listingId) {
     },
   };
 
-  // Fetch listing details
   return fetch(url, options)
     .then((response) => {
       if (!response.ok) {
@@ -154,7 +140,6 @@ function fetchListing(listingId) {
     });
 }
 
-// Fetch and display listings
 document.addEventListener("DOMContentLoaded", async function () {
   try {
     const listings = await fetchListings();
@@ -165,7 +150,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 });
 
-// Attach listener to handle delete button clicks
 document.addEventListener("click", function (event) {
   if (event.target.classList.contains("delete-button")) {
     const listingId = event.target.dataset.listingId;

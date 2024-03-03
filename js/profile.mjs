@@ -10,7 +10,6 @@ function showUserAvatar() {
 }
 showUserAvatar();
 
-// display user information
 function showUserInfo() {
   const userName = localStorage.getItem("name");
   const userEmail = localStorage.getItem("email");
